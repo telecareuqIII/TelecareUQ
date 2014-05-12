@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+</head>
+
+<body>
+
+<?php 
+include('conexion.php'); 
+$conexion=conectar();
+?>
+
+<form action="" method="post" class="mensajeFamiliar" name="mensaje"> 
+
+<p style="text-align: justify;">
+	&nbsp;</p>
+<p style="text-align: justify;">
+	<span style="font-size:16px;"><span style="font-family:georgia,serif;">TeleCare Uq tiene como prop&oacute;sito brindar un constante monitoreo y an&aacute;lisis de estado de &aacute;nimo del Paciente, con esto buscando la tranquilidad, estabilidad y mejoramiento f&iacute;sico y emocional de mismo. Si usted como&nbsp;Familiar encargado observa una&nbsp;anomal&iacute;a o alguna situaci&oacute;n fuera de lo normal, seria oportuno que lo informe lo mas pronto posible.</span></span></p>
+<p style="text-align: justify;">
+	&nbsp;</p>
+<p style="text-align: justify;">
+	<span style="font-size:16px;"><span style="font-family:georgia,serif;">En el siguiente cuadro de texto digite el mensaje de alerta que desea enviar, &eacute;ste llegar&aacute; al Especialista asignado, el lo analizar&aacute;, responder&aacute; y tomar&aacute; las medidas que el crea conveniente. &iexcl;Muchas gracias!</span></span></p>
+<p style="text-align: justify;">
+	&nbsp;</p>
+<p style="text-align: justify;">
+	<textarea cols="100" name="mensajeAlerta" rows="8"></textarea></p>
+
+<p style="margin-left: 40px; text-align: center;">
+	<span style="font-family:georgia,serif;"><input name="enviarMensaje" type="submit" value="Enviar mensaje" /></span></p>
+</form>
+
+<?
+
+//Si se da clic en el boton enviar
+if(isset($_POST[enviarMensaje])){
+
+	//Si el area de texto esta vacia
+	if ($_POST[mensajeAlerta]== ''){
+		//Se informa que debe ingresar el mensaje en el area de texto
+		echo '<script>alert("Debe ingresar su mensaje de alerta en el área de texto")</script>';
+	}else{
+		//Se guarda el mensaje
+		$mensaje=$_POST['mensajeAlerta'];
+		//Se envia el mensaje al correo
+		mail('maik21-09@hotmail.com', 'Mensaje de Alerta - TeleCare UQ', $mensaje);
+		//Se informa que el mensaje se envio exitosamente
+		echo '<script>alert("Su mensaje de alerta ha sido enviado al Especialista exitosamente")</script>';
+	}
+}
+?>
+
+
+</body>
+</html>
